@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Simmiye ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    height:100vh;
+    background:radial-gradient(circle at top,#ff9a9e,#fad0c4,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+}
+
+/* Floating hearts */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:24px;
+    animation:float 6s linear infinite;
+    opacity:0.8;
+}
+@keyframes float{
+    0%{transform:translateY(0) scale(1);opacity:1;}
+    100%{transform:translateY(-110vh) scale(1.5);opacity:0;}
+}
+
+.box{
+    background:rgba(255,255,255,0.95);
+    padding:45px 35px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,0,0,0.25);
+    z-index:10;
+    max-width:350px;
+    animation:zoom 1.2s ease;
+}
+
+@keyframes zoom{
+    from{transform:scale(0.5);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+h1{
+    font-family:'Pacifico',cursive;
+    color:#ff2f6d;
+    font-size:36px;
+}
+
+h2{
+    margin-top:10px;
+    color:#444;
+    font-weight:500;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+button{
+    padding:14px 28px;
+    font-size:18px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:600;
+}
+
+#yes{
+    background:linear-gradient(to right,#ff416c,#ff4b2b);
+    color:white;
+    box-shadow:0 5px 15px rgba(255,65,108,0.6);
+}
+
+#yes:hover{
+    transform:scale(1.1);
+}
+
+#no{
+    background:#444;
+    color:white;
+    position:absolute;
+}
+
+.final{
+    text-align:center;
+    color:white;
+    font-size:42px;
+    font-family:'Pacifico',cursive;
+    animation:fadein 1.5s ease;
+}
+
+@keyframes fadein{
+    from{opacity:0;transform:scale(0.5);}
+    to{opacity:1;transform:scale(1);}
+}
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    background:red;
+    top:-10px;
+    animation:confetti 5s linear infinite;
+}
+
+@keyframes confetti{
+    0%{transform:translateY(0) rotate(0);}
+    100%{transform:translateY(110vh) rotate(720deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="box" id="box">
+    <h1>Simmiye ❤️</h1>
+    <h2>Will you be my forever? 💍</h2>
+    <div class="buttons">
+        <button id="yes" onclick="yesClick()">YES 💖</button>
+        <button id="no" onmouseover="moveNo()">NO 💔</button>
+    </div>
+</div>
+
+<script>
+// Floating hearts
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*4) + "s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,300);
+
+// NO button run
+function moveNo(){
+    let x = Math.random() * (window.innerWidth - 120);
+    let y = Math.random() * (window.innerHeight - 60);
+    let noBtn = document.getElementById("no");
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+// YES click
+function yesClick(){
+    document.getElementById("music").play();
+    document.body.innerHTML = `
+    <div class="final">
+        Simmiye 😭❤️<br>
+        You made me the happiest person alive 💍💖<br><br>
+        I love you forever 🥰
+    </div>
+    `;
+    confetti();
+}
+
+// Confetti
+function confetti(){
+    for(let i=0;i<150;i++){
+        let c = document.createElement("div");
+        c.classList.add("confetti");
+        c.style.left = Math.random()*100 + "vw";
+        c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+        c.style.animationDuration = (2+Math.random()*3)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+</script>
+
+</body>
+</html>
